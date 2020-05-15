@@ -76,7 +76,7 @@ public class Servis {
 
 	@Override
 	public String toString() {
-		return "Servis [auto_za_servis=" + auto_za_servis + ", serviser=" + serviser + ", termin=" + termin + ", opis="
+		return "Servis [auto_za_servis=" + auto_za_servis.getMarka() + " " + auto_za_servis.getModel() + ", serviser=" + serviser.getPrezime() + ", termin=" + termin + ", opis="
 				+ opis + ", delovi=" + delovi + ", status_servisa=" + status_servisa + "]";
 	}
 	

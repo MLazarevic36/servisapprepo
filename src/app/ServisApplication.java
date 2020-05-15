@@ -3,13 +3,17 @@ package app;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Administrator;
 import model.Automobil;
+import model.Deo;
 import model.Marka_auta;
 import model.Model_auta;
 import model.Musterija;
+import model.Servis;
+import model.Serviser;
 
 public class ServisApplication {
 
@@ -94,6 +98,45 @@ public class ServisApplication {
 		}
 		} finally {
 			brAuto.close();
+		}
+		
+		FileReader frServis = new FileReader("C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\servisi");
+		BufferedReader brServis = new BufferedReader(frServis);
+
+		try {
+		String fileLine = null;
+		
+		while ((fileLine =  brServis.readLine()) != null) {
+			String[] fields = fileLine.split(",");
+				
+			Servis servis = new Servis();
+			
+			Automobil auto = new Automobil();
+			auto.setMarka(Marka_auta.valueOf(fields[0]));
+			auto.setModel(Model_auta.valueOf(fields[1]));
+			
+			Serviser serviser = new Serviser();
+			serviser.setPrezime(fields[2]);
+			
+			List<Deo> delovi = new ArrayList<>();
+			Deo prviDeo = new Deo();
+			Deo drugiDeo = new Deo();
+			prviDeo.setNaziv(fields[5]);
+			drugiDeo.setNaziv(fields[6]);
+			delovi.add(prviDeo);
+			delovi.add(drugiDeo);
+			
+			servis.setAuto_za_servis(auto);
+			servis.setServiser(serviser);
+			servis.setTermin(fields[3]);
+			servis.setOpis(fields[4]);
+			servis.setDelovi(delovi);
+			servis.setStatus_servisa(fields[7]);
+			
+			System.out.println(servis);
+		}
+		} finally {
+			brServis.close();
 		}
 		
 	}

@@ -50,6 +50,11 @@ public class Deo {
 	public void setCena(int cena) {
 		this.cena = cena;
 	}
+
+	@Override
+	public String toString() {
+		return "Deo [naziv=" + naziv + "]";
+	}
 	
 	
 	
