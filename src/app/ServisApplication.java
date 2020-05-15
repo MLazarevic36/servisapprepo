@@ -32,7 +32,7 @@ public class ServisApplication {
 			admin.setAdresa(fields[4]);
 			admin.setBroj_telefona(fields[5]);
 			admin.setJMBG(fields[6]);
-			admin.setPlata(fields[7]);
+			admin.setPlata(Integer.parseInt(fields[7]));
 			admin.setPol(fields[8]);
 			
 			System.out.println(admin);
