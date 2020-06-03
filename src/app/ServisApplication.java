@@ -1,24 +1,14 @@
 package app;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.Administrator;
 import model.Automobil;
-import model.Deo;
 import model.Marka_auta;
 import model.Model_auta;
 import model.Musterija;
-import model.Servis;
-import model.Serviser;
+
 
 public class ServisApplication {
 
@@ -39,6 +29,29 @@ public class ServisApplication {
 //		Integer id = 3;
 //		admin.izmeniAdministratora(id, admin);
 //		admin.obrisiAdministratora(id);
+		
+		Musterija musterija = new Musterija();
+		musterija.setPrezime("Firmino");
+		
+		Automobil automobil = new Automobil();
+//		automobil.setVlasnik(musterija);
+		automobil.setMarka(Marka_auta.VOLKSWAGEN);
+		automobil.setModel(Model_auta.GOLF7);
+		automobil.setGodina_proizvodnje(2019);
+		automobil.setZapremina_motora("36");
+		automobil.setSnaga_motora("250");
+		automobil.setVrsta_goriva("dizel");
+		
+//		Integer idMusterije = 2;
+//		
+//		automobil.dodajAutomobil(idMusterije, automobil);
+		
+//		Integer idZaIzmenu = 3;
+//		
+//		automobil.izmeniAutomobil(idZaIzmenu, automobil);
+//		
+		automobil.obrisiAutomobil(3);
+		
 		
 	}
 

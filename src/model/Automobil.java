@@ -1,6 +1,20 @@
 package model;
 
-public class Automobil {
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
+
+import crud.AdministratorInterface;
+import crud.AutomobilInterface;
+
+public class Automobil implements AutomobilInterface {
 
 	private Musterija vlasnik;
 	private Marka_auta marka;
@@ -89,6 +103,126 @@ public class Automobil {
 		return "Automobil [vlasnik=" + vlasnik.getPrezime() + ", marka=" + marka + ", model=" + model + ", godina_proizvodnje="
 				+ godina_proizvodnje + ", zapremina_motora=" + zapremina_motora + ", snaga_motora=" + snaga_motora
 				+ ", vrsta_goriva=" + vrsta_goriva + "]";
+	}
+
+	@Override
+	public void dodajAutomobil(Integer idMusterije, Automobil auto) throws IOException {
+		
+		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\musterije";
+		FileReader frMusterije = new FileReader(filepath);
+		BufferedReader brMusterije = new BufferedReader(frMusterije);
+		String prezimeMusterije = null;
+		try {
+		String fileLine = null;
+		
+		while ((fileLine =  brMusterije.readLine()) != null) {
+			String[] fields = fileLine.split(",");
+			if (fields.length > 0) {
+                if (fields[0].equals(idMusterije.toString())) {
+                  prezimeMusterije = fields[2];
+                } 
+            }	
+		}
+		} finally {
+			brMusterije.close();
+		}
+		
+		String filepathAuto = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
+		
+		FileReader frAd = new FileReader(filepathAuto);
+		
+		BufferedReader brAd = new BufferedReader(frAd);
+		String last = "", line;
+
+	    while ((line = brAd.readLine()) != null) { 
+	        last = line;
+	    }
+	    
+	    String[] fields = last.split(",");
+	    
+	    String id = fields[0];
+	    Integer newId = Integer.parseInt(id) + 1;
+
+		brAd.close();
+		
+		try{	   	
+	    	
+	    	FileWriter fw = new FileWriter(filepathAuto,true);
+	    	BufferedWriter bw = new BufferedWriter(fw);
+	    	PrintWriter pw = new PrintWriter(bw);
+	    	String autoId = newId.toString();
+	    	String newRow = autoId + ',' + prezimeMusterije + "," + auto.getMarka() + "," + auto.getModel() 
+	    					+ "," + auto.getGodina_proizvodnje() + "," + auto.getZapremina_motora() + "," + auto.getSnaga_motora()
+	    					+ "," + auto.getVrsta_goriva();
+	    	pw.println(newRow);
+	    	pw.close();
+
+	      }catch(IOException ioe){
+	         System.out.println("Exception occurred:");
+	    	 ioe.printStackTrace();
+	       }
+
+		
+	}
+
+	@Override
+	public void izmeniAutomobil(Integer id, Automobil auto) throws FileNotFoundException, IOException {
+		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
+		
+		try {
+            FileInputStream fstream = new FileInputStream(filepath);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            String strLine;
+            StringBuilder fileContent = new StringBuilder();
+            while ((strLine = br.readLine()) != null) {
+                
+                String fields[] = strLine.split(",");
+                if (fields.length > 0) {
+                    if (fields[0].equals(id.toString())) {
+                        String newLine = fields[0] + "," + auto.getVlasnik().getPrezime()  + "," + auto.getMarka() + "," + auto.getModel() 
+    					+ "," + auto.getGodina_proizvodnje() + "," + auto.getZapremina_motora() + "," + auto.getSnaga_motora()
+    					+ "," + auto.getVrsta_goriva();
+                        fileContent.append(newLine);
+                        fileContent.append("\n");
+                    } else {
+                        fileContent.append(strLine);
+                        fileContent.append("\n");
+                    }
+                }
+            }
+            FileWriter fstreamWrite = new FileWriter(filepath);
+            BufferedWriter out = new BufferedWriter(fstreamWrite);
+            out.write(fileContent.toString());
+            out.close();
+            br.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+		
+	}
+
+	@Override
+	public void obrisiAutomobil(Integer id) throws FileNotFoundException, IOException {
+		
+		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
+		
+		RandomAccessFile file = new RandomAccessFile(filepath, "rw");
+		String delete;
+		String task="";
+		
+	    while ((delete = file.readLine()) != null) {
+	    	String fields[] = delete.split(",");
+	        if (fields[0].equals(id.toString())) {
+	            continue;
+	        }
+	        task+=delete+"\n";
+	    }
+
+	        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
+	        writer.write(task);
+	        file.close();
+	        writer.close();
+		
 	}
 	
 	

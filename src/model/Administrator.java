@@ -47,7 +47,9 @@ public class Administrator extends Korisnik implements AdministratorInterface {
 	@Override
 	public void dodajAdministratora(Administrator admin) throws IOException {
 		
-		FileReader frAd = new FileReader("C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\administratori");
+		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\administratori";
+		
+		FileReader frAd = new FileReader(filepath);
 		
 		BufferedReader brAd = new BufferedReader(frAd);
 		String last = "", line;
@@ -64,7 +66,7 @@ public class Administrator extends Korisnik implements AdministratorInterface {
 		brAd.close();
 		
 		try{	   	
-	    	String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\administratori";
+	    	
 
 	    	
 	    	FileWriter fw = new FileWriter(filepath,true);
@@ -129,7 +131,7 @@ public class Administrator extends Korisnik implements AdministratorInterface {
 		RandomAccessFile file = new RandomAccessFile(filepath, "rw");
 		String delete;
 		String task="";
-		byte []tasking;
+		
 	    while ((delete = file.readLine()) != null) {
 	    	String fields[] = delete.split(",");
 	        if (fields[0].equals(id.toString())) {

@@ -8,9 +8,9 @@ public class Musterija extends Korisnik {
 		super();
 	}
 
-	public Musterija(String ime, String prezime, String JMBG, String pol, String adresa, String broj_telefona,
+	public Musterija(Integer id, String ime, String prezime, String JMBG, String pol, String adresa, String broj_telefona,
 			String korisnicko_ime, String lozinka, String broj_sakupljenih_nagradnih_bodova) {
-		super(ime, prezime, JMBG, pol, adresa, broj_telefona, korisnicko_ime, lozinka);
+		super(id, ime, prezime, JMBG, pol, adresa, broj_telefona, korisnicko_ime, lozinka);
 		this.broj_sakupljenih_nagradnih_bodova = broj_sakupljenih_nagradnih_bodova;
 	}
 

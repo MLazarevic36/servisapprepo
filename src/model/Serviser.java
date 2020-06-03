@@ -9,9 +9,9 @@ public class Serviser extends Korisnik {
 		super();
 	}
 
-	public Serviser(String ime, String prezime, String JMBG, String pol, String adresa, String broj_telefona,
+	public Serviser(Integer id, String ime, String prezime, String JMBG, String pol, String adresa, String broj_telefona,
 			String korisnicko_ime, String lozinka, int plata, Specijalizacija specijalizacija) {
-		super(ime, prezime, JMBG, pol, adresa, broj_telefona, korisnicko_ime, lozinka);
+		super(id, ime, prezime, JMBG, pol, adresa, broj_telefona, korisnicko_ime, lozinka);
 		this.plata = plata;
 		this.specijalizacija = specijalizacija;
 	}
