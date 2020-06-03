@@ -15,6 +15,9 @@ import crud.AdministratorInterface;
 import crud.AutomobilInterface;
 
 public class Automobil implements AutomobilInterface {
+	
+	public static final String AUTO_PATH = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
+	public static final String MUSTERIJE_PATH = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\musterije";
 
 	private Musterija vlasnik;
 	private Marka_auta marka;
@@ -108,8 +111,7 @@ public class Automobil implements AutomobilInterface {
 	@Override
 	public void dodajAutomobil(Integer idMusterije, Automobil auto) throws IOException {
 		
-		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\musterije";
-		FileReader frMusterije = new FileReader(filepath);
+		FileReader frMusterije = new FileReader(MUSTERIJE_PATH);
 		BufferedReader brMusterije = new BufferedReader(frMusterije);
 		String prezimeMusterije = null;
 		try {
@@ -127,9 +129,8 @@ public class Automobil implements AutomobilInterface {
 			brMusterije.close();
 		}
 		
-		String filepathAuto = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
 		
-		FileReader frAd = new FileReader(filepathAuto);
+		FileReader frAd = new FileReader(AUTO_PATH);
 		
 		BufferedReader brAd = new BufferedReader(frAd);
 		String last = "", line;
@@ -147,7 +148,7 @@ public class Automobil implements AutomobilInterface {
 		
 		try{	   	
 	    	
-	    	FileWriter fw = new FileWriter(filepathAuto,true);
+	    	FileWriter fw = new FileWriter(AUTO_PATH,true);
 	    	BufferedWriter bw = new BufferedWriter(fw);
 	    	PrintWriter pw = new PrintWriter(bw);
 	    	String autoId = newId.toString();
@@ -167,10 +168,9 @@ public class Automobil implements AutomobilInterface {
 
 	@Override
 	public void izmeniAutomobil(Integer id, Automobil auto) throws FileNotFoundException, IOException {
-		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
 		
 		try {
-            FileInputStream fstream = new FileInputStream(filepath);
+            FileInputStream fstream = new FileInputStream(AUTO_PATH);
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
             String strLine;
             StringBuilder fileContent = new StringBuilder();
@@ -190,7 +190,7 @@ public class Automobil implements AutomobilInterface {
                     }
                 }
             }
-            FileWriter fstreamWrite = new FileWriter(filepath);
+            FileWriter fstreamWrite = new FileWriter(AUTO_PATH);
             BufferedWriter out = new BufferedWriter(fstreamWrite);
             out.write(fileContent.toString());
             out.close();
@@ -204,9 +204,8 @@ public class Automobil implements AutomobilInterface {
 	@Override
 	public void obrisiAutomobil(Integer id) throws FileNotFoundException, IOException {
 		
-		String filepath = "C:\\Users\\hrle9\\eclipse-workspace\\ServisApplication\\src\\app\\automobili";
 		
-		RandomAccessFile file = new RandomAccessFile(filepath, "rw");
+		RandomAccessFile file = new RandomAccessFile(AUTO_PATH, "rw");
 		String delete;
 		String task="";
 		
@@ -218,7 +217,7 @@ public class Automobil implements AutomobilInterface {
 	        task+=delete+"\n";
 	    }
 
-	        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
+	        BufferedWriter writer = new BufferedWriter(new FileWriter(AUTO_PATH));
 	        writer.write(task);
 	        file.close();
 	        writer.close();

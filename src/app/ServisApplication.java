@@ -2,12 +2,16 @@ package app;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Administrator;
 import model.Automobil;
+import model.Deo;
 import model.Marka_auta;
 import model.Model_auta;
 import model.Musterija;
+import model.Servis;
 
 
 public class ServisApplication {
@@ -50,7 +54,23 @@ public class ServisApplication {
 //		
 //		automobil.izmeniAutomobil(idZaIzmenu, automobil);
 //		
-		automobil.obrisiAutomobil(3);
+//		automobil.obrisiAutomobil(3);
+		
+		List<Deo> delovi = new ArrayList<>();
+		Deo prviDeo = new Deo();
+		Deo drugiDeo = new Deo();
+		prviDeo.setNaziv("vrata");
+		drugiDeo.setNaziv("motor");
+		delovi.add(prviDeo);
+		delovi.add(drugiDeo);
+		
+		Servis servis = new Servis();
+		servis.setTermin("10:00");
+		servis.setOpis("opis novih kola");
+		servis.setDelovi(delovi);
+		servis.setStatus_servisa("prosao");
+		
+		servis.dodajServis(2, 2, servis);
 		
 		
 	}
