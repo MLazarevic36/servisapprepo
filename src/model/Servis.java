@@ -104,7 +104,7 @@ public class Servis implements ServisInterface {
 	}
 
 	@Override
-	public void dodajServis(Integer idAutomobila, Integer idServisera, Servis servis) throws IOException {
+	public void dodajServis(Integer idAutomobila, Integer idServisera, List<Deo> delovi, Servis servis) throws IOException {
 		
 		FileReader frAuto = new FileReader(AUTO_PATH);
 		BufferedReader brAuto = new BufferedReader(frAuto);
@@ -168,7 +168,7 @@ public class Servis implements ServisInterface {
 	    	PrintWriter pw = new PrintWriter(bw);
 	    	String servisId = newId.toString();
 	    	String newRow = servisId + ',' + markaAuta + "," + modelAuta + "," + prezimeServisera + "," + servis.getTermin() 
-	    					+ "," + servis.getOpis() + "," + servis.getDelovi() + "," + servis.getStatus_servisa();
+	    					+ "," + servis.getOpis() + "," + delovi + "," + servis.getStatus_servisa();
 	    	pw.println(newRow);
 	    	pw.close();
 

@@ -65,7 +65,7 @@ public class Deo {
 
 	@Override
 	public String toString() {
-		return "Deo [naziv=" + naziv + "]";
+		return "Deo [id=" + id + "]";
 	}
 	
 	

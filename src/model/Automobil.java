@@ -121,7 +121,8 @@ public class Automobil implements AutomobilInterface {
 			String[] fields = fileLine.split(",");
 			if (fields.length > 0) {
                 if (fields[0].equals(idMusterije.toString())) {
-                  prezimeMusterije = fields[2];
+                  prezimeMusterije = fields[2]; 
+                  //u sustini ovaj deo moze da se preskoci ako ces u fajlu cuvati samo id od musterije
                 } 
             }	
 		}
